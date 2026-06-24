@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f1f5f9;
+  --foreground: white;
+}
+
+@theme {
+  --font-sans: var(--font-inter), sans-serif;
+  --font-heading: "Times New Roman", Times, Georgia, serif;
+
+  --color-deep-blue: #0e172a;
+  --color-light-blue: #143362;
+  --color-gray-border: #e2e8ef;
+  --color-gray-text: #96a5b9;
+  --color-red: #dc2626;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
