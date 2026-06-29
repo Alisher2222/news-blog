@@ -1,7 +1,5 @@
 import { IconType } from "react-icons";
 
-const variants = {};
-
 type FieldProps = {
   placeholder: string;
   icon: IconType;

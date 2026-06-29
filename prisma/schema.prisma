@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+enum Content{
+  PARAGRAPH
+  QUOTE
+  IMAGE
+}
+
+enum Category{
+  CITY
+  SOCIETY
+  INCIDENTS
+  ECONOMY
+  CULTURE
+  SPORTS
+  POLITICS
+  SCIENCE
+}
+
+enum UserRole {
+  JOURNALIST
+  ADMIN
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  surname   String
+  email     String   @unique
+  password  String
+  avatar    String?
+  role      UserRole @default(JOURNALIST)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Post[]
+}
+
+model Post {
+  id          String   @id @default(cuid())
+
+  title       Json
+  description Json
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  thumbnail   String
+
+  category    Category
+
+  viewCount   Int @default(0)
+
+  authorId    String
+  author       User @relation(fields: [authorId], references: [id], onDelete: Restrict)
+
+  content      PostContent[]
+
+  @@index([category])
+  @@index([createdAt])
+}
+
+model PostContent {
+  id      String @id @default(cuid())
+
+  postId  String
+  post    Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  type    Content
+  content Json
+  order   Int
+
+  @@unique([postId, order])
+}

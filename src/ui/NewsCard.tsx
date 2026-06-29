@@ -27,9 +27,9 @@ export function NewsCard({
         ></div>
         <div className="p-4 flex flex-col gap-2">
           <Category category={category} />
-          <h2 className="text-black font-bold text-xl group-hover:text-red font-heading">
+          <h3 className="text-black font-bold text-xl group-hover:text-red font-heading">
             {title}
-          </h2>
+          </h3>
           <p className="text-gray-400  flex items-center gap-1">
             <IoTimeOutline />
             {time}

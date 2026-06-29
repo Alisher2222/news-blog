@@ -41,7 +41,7 @@ export function Hero({
       <Link href={link}>
         <section
           style={{ backgroundImage: `url(${thumbnail})` }}
-          className=" transition-all duration-300 hover:-translate-2 flex flex-col justify-end gap-3 rounded-xl h-[700px] bg-cover  p-10"
+          className=" transition-all duration-300 hover:-translate-2 flex flex-col justify-end gap-3 rounded-xl h-[700px] bg-cover  p-10 bg-center bg-no-repeat "
         >
           <div className="flex gap-4">
             <Category category={category} />

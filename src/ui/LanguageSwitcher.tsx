@@ -23,7 +23,7 @@ export default function LanguageSwitcher() {
       ? `${newPathname}?${currentQueryString}`
       : newPathname;
 
-    router.push(finalUrl);
+    window.location.href = finalUrl;
   };
 
   const currentLang = (pathname?.split("/")[1] || "ru") as Language;

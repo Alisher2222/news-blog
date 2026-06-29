@@ -33,23 +33,79 @@ export type NavLinkType = {
 export type LocalizedData<T> = Record<Language, T>;
 
 export type CategoryType =
-  | "City"
-  | "Society"
-  | "Incidents"
-  | "Economy"
-  | "Culture"
-  | "Sports"
-  | "Politics"
-  | "Science";
+  | "CITY"
+  | "SOCIETY"
+  | "INCIDENTS"
+  | "ECONOMY"
+  | "CULTURE"
+  | "SPORTS"
+  | "POLITICS"
+  | "SCIENCE";
+
+export type RoleType = "JOURNALIST" | "ADMIN";
+export type PostContentKind = "PARAGRAPH" | "QUOTE" | "IMAGE";
+
+export type LocalizedText = Record<Language, string>;
 
 export type PostType = {
   id: string;
-  title: Record<Language, string>;
-  description: Record<Language, string>;
-  text: Record<Language, string>;
-  date: string;
+
+  title: LocalizedText;
+  description: LocalizedText;
+
+  createdAt: string;
+  updatedAt: string;
+
+  thumbnail: string;
+
+  category: CategoryType;
+
+  viewCount: number;
+
+  authorId: string;
+};
+
+export type PostContentType = {
+  id: string;
+
+  postId: string;
+
+  type: PostContentKind;
+
+  content: LocalizedText;
+
+  order: number;
+};
+
+export type EditorBlockType = {
+  id: string;
+  type: PostContentKind;
+  value: string;
+};
+
+export type CreatePostInput = {
+  lang: Language;
+  title: string;
+  description: string;
   thumbnail: string;
   category: CategoryType;
+  blocks: { type: PostContentKind; value: string }[];
+};
+
+export type UserType = {
+  id: string;
+
+  name: string;
+  surname: string;
+
+  email: string;
+
+  avatar: string | null;
+
+  role: RoleType;
+
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type SideBarElementType = {

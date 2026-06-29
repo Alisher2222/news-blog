@@ -6,6 +6,7 @@ import { SideBarElement } from "./sideBarElement";
 type SideBarType = {
   language: Language;
   recentNews: SideBarElementType[];
+  className?: string;
 };
 
 const heading: Record<Language, string> = {
@@ -14,9 +15,9 @@ const heading: Record<Language, string> = {
   kk: "соңғы жаңалықтар",
 };
 
-export function SideBar({ language, recentNews }: SideBarType) {
+export function SideBar({ language, recentNews, className = "" }: SideBarType) {
   return (
-    <aside className="bg-white">
+    <aside className={` ${className} bg-white`}>
       <div className="bg-deep-blue flex justify-between py-2 px-3">
         <div className="flex items-center gap-1">
           <CiStreamOn className="text-red" size={32} />
@@ -34,7 +35,7 @@ export function SideBar({ language, recentNews }: SideBarType) {
           <SideBarElement
             key={`sidebar-${news.id}`}
             id={news.id}
-            date={news.date}
+            date={news.date.toString()}
             title={news.title}
             link={news.link}
           />

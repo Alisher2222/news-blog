@@ -151,42 +151,42 @@ export const heroText: LocalizedData<HeroTextContent> = {
 };
 
 export const categoryText: Record<CategoryType, CategoryTextType> = {
-  City: {
+  CITY: {
     ru: "ГОРОД",
     kk: "ҚАЛА",
     en: "CITY",
   },
-  Society: {
+  SOCIETY: {
     ru: "ОБЩЕСТВО",
     kk: "ҚОҒАМ",
     en: "SOCIETY",
   },
-  Incidents: {
+  INCIDENTS: {
     ru: "ПРОИСШЕСТВИЯ",
     kk: "ОҚИҒАЛАР",
     en: "INCIDENTS",
   },
-  Politics: {
+  POLITICS: {
     ru: "ПОЛИТИКА",
     kk: "САЯСАТ",
     en: "POLITICS",
   },
-  Economy: {
+  ECONOMY: {
     ru: "ЭКОНОМИКА",
     kk: "ЭКОНОМИКА",
     en: "ECONOMY",
   },
-  Culture: {
+  CULTURE: {
     ru: "КУЛЬТУРА",
     kk: "МӘДЕНИЕТ",
     en: "CULTURE",
   },
-  Science: {
+  SCIENCE: {
     ru: "НАУКА",
     kk: "ҒЫЛЫМ",
     en: "SCIENCE",
   },
-  Sports: {
+  SPORTS: {
     ru: "СПОРТ",
     kk: "СПОРТ",
     en: "SPORTS",
@@ -209,3 +209,97 @@ languages.forEach((lang) => {
     };
   });
 });
+
+export const categoryPageText: Record<Language, string> = {
+  ru: "Все материалы рубрики «CATEGORY» — оперативно и проверено.",
+  kk: "«CATEGORY» айдарының барлық материалдары — жедел және тексерілген.",
+  en: "All materials in the 'CATEGORY' section — prompt and verified.",
+};
+
+export const constantValue = {
+  email: "alisherasanov@gmail.com",
+  telephoneNumber: "8 (775) 767 36-83",
+  address: "пр. Независимости, 8, Өскемен, Казахстан",
+  cityName: "Oskemen",
+};
+
+export const postAuthorText: Record<Language, string> = {
+  ru: "Автор",
+  kk: "Автор",
+  en: "Author",
+};
+
+export const adminPanelText: Record<
+  Language,
+  {
+    createPost: string;
+    searchPlaceholder: string;
+    thumb: string;
+    title: string;
+    category: string;
+    datePublished: string;
+    actions: string;
+    edit: string;
+    delete: string;
+    confirmDelete: string;
+    empty: string;
+  }
+> = {
+  ru: {
+    createPost: "Создать пост",
+    searchPlaceholder: "Поиск по заголовку, рубрике или ID...",
+    thumb: "Фото",
+    title: "Заголовок",
+    category: "Рубрика",
+    datePublished: "Дата публикации",
+    actions: "Действия",
+    edit: "Изменить",
+    delete: "Удалить",
+    confirmDelete: "Удалить этот пост? Действие необратимо.",
+    empty: "Посты не найдены.",
+  },
+  kk: {
+    createPost: "Пост жасау",
+    searchPlaceholder: "Тақырып, айдар немесе ID бойынша іздеу...",
+    thumb: "Сурет",
+    title: "Тақырып",
+    category: "Айдар",
+    datePublished: "Жарияланған күні",
+    actions: "Әрекеттер",
+    edit: "Өзгерту",
+    delete: "Жою",
+    confirmDelete: "Бұл постты жою керек пе? Әрекет қайтарылмайды.",
+    empty: "Посттар табылмады.",
+  },
+  en: {
+    createPost: "Create New Post",
+    searchPlaceholder: "Search posts by title, category, or ID...",
+    thumb: "Thumb",
+    title: "Title",
+    category: "Category",
+    datePublished: "Date Published",
+    actions: "Actions",
+    edit: "Edit",
+    delete: "Delete",
+    confirmDelete: "Delete this post? This cannot be undone.",
+    empty: "No posts found.",
+  },
+};
+
+export const categorySearchText: Record<
+  Language,
+  { placeholder: string; empty: string }
+> = {
+  ru: {
+    placeholder: "Поиск по заголовку или описанию...",
+    empty: "По вашему запросу ничего не найдено.",
+  },
+  kk: {
+    placeholder: "Тақырып немесе сипаттама бойынша іздеу...",
+    empty: "Сұрауыңыз бойынша ештеңе табылмады.",
+  },
+  en: {
+    placeholder: "Search by title or description...",
+    empty: "Nothing matches your search.",
+  },
+};

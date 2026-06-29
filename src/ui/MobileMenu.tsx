@@ -51,6 +51,7 @@ export default function MobileMenu({
                   className="hover:text-red"
                   href={link.href}
                   key={`mobileMenu-${index}`}
+                  onClick={onClose}
                 >
                   <li
                     className="h-20 hover:text-red cursor-pointer flex items-center justify-between"
@@ -64,7 +65,7 @@ export default function MobileMenu({
             </ul>
             <button
               className="absolute right-4 top-4 cursor-pointer"
-              onClick={() => onClose()}
+              onClick={onClose}
             >
               <IoIosClose className="text-black size-10" />
             </button>

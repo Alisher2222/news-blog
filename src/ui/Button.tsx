@@ -1,6 +1,7 @@
-import { ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 const VARIANTS = {
+  standard: "p-3 rounded-[10px] border-1 ",
   footerSocialMedua:
     "w-[50%] px-4 py-2 text-white rounded-[10px] border-1 border-gray-border hover:bg-white hover:text-deep-blue h-fit",
   footerWhatsapp:
@@ -11,13 +12,13 @@ type ButtonProps = {
   variant?: keyof typeof VARIANTS;
   children?: ReactNode;
   className?: string;
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const base = "flex justify-center items-center gap-4 cursor-pointer ";
 
 export function Button({
   children,
-  variant = "footerSocialMedua",
+  variant = "standard",
   className = "",
   ...props
 }: ButtonProps) {

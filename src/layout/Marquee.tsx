@@ -30,14 +30,6 @@ export function MarqueeComponent({
             </p>
           ))}
         </Marquee>
-        <p className="text-gray-text hidden sm:block">
-          {language === "ru"
-            ? "Обновлено"
-            : language === "kk"
-              ? "Жаңартылды"
-              : "Updated at"}
-          :{time}
-        </p>
       </div>
     </div>
   );
