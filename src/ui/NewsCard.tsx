@@ -1,11 +1,11 @@
-import { CategoryType } from "../types";
+import { DBCategoryType } from "../types";
 import Link from "next/link";
 import { IoTimeOutline } from "react-icons/io5";
 import { Category } from "./Category";
 
 type NewsCardProps = {
   thumbnail: string;
-  category: CategoryType;
+  category: DBCategoryType;
   title: string;
   time: string;
   link: string;

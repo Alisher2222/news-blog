@@ -1,4 +1,4 @@
-import { CategoryType, Language } from "@/src/types";
+import { DBCategoryType, Language } from "@/src/types";
 import { Category } from "@/src/ui/Category";
 import { IoTimeOutline } from "react-icons/io5";
 import Link from "next/link";
@@ -7,7 +7,7 @@ import { FaArrowRight } from "react-icons/fa";
 
 type HeroProps = {
   thumbnail: string;
-  category: CategoryType;
+  category: DBCategoryType;
   title: string;
   time: string;
   link: string;

@@ -32,7 +32,7 @@ export type NavLinkType = {
 
 export type LocalizedData<T> = Record<Language, T>;
 
-export type CategoryType =
+export type DBCategoryType =
   | "CITY"
   | "SOCIETY"
   | "INCIDENTS"
@@ -40,8 +40,9 @@ export type CategoryType =
   | "CULTURE"
   | "SPORTS"
   | "POLITICS"
-  | "SCIENCE"
-  | "ALL";
+  | "SCIENCE";
+
+export type CategoryType = DBCategoryType | "ALL";
 
 export type RoleType = "JOURNALIST" | "ADMIN";
 export type PostContentKind = "PARAGRAPH" | "QUOTE" | "IMAGE";
@@ -59,7 +60,7 @@ export type PostType = {
 
   thumbnail: string;
 
-  category: CategoryType;
+  category: DBCategoryType;
 
   viewCount: number;
 
@@ -89,7 +90,7 @@ export type CreatePostInput = {
   title: string;
   description: string;
   thumbnail: string;
-  category: CategoryType;
+  category: DBCategoryType;
   blocks: { type: PostContentKind; value: string }[];
 };
 

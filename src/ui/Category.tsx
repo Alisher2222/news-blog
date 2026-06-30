@@ -1,10 +1,10 @@
 "use client";
 
-import { CategoryType, Language } from "../types";
+import { DBCategoryType, Language } from "../types";
 import { categoryText } from "../locales/dictionary";
 import { useParams } from "next/navigation";
 
-const CATEGORY_VARIANTS: Record<CategoryType, string> = {
+const CATEGORY_VARIANTS: Record<DBCategoryType, string> = {
   CITY: "bg-light-blue",
   SOCIETY: "bg-emerald-600",
   INCIDENTS: "bg-red",
@@ -19,7 +19,7 @@ export function Category({
   category,
   className = "",
 }: {
-  category: CategoryType;
+  category: DBCategoryType;
   className?: string;
 }) {
   const { lang } = useParams<{ lang: Language }>();

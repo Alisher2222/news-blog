@@ -16,6 +16,7 @@ import { updatePostAction } from "../../actions";
 import { categoryText } from "@/src/locales/dictionary";
 import type {
   CategoryType,
+  DBCategoryType,
   EditorBlockType,
   Language,
   LocalizedData,
@@ -27,7 +28,7 @@ export type PostEditorInitial = {
   title: string;
   description: string;
   thumbnail: string;
-  category: CategoryType;
+  category: DBCategoryType;
   blocks: { type: PostContentKind; value: string }[];
 };
 
@@ -182,8 +183,8 @@ export function PostEditor({ lang, initial }: PostEditorProps) {
   const [title, setTitle] = useState(initial?.title ?? "");
   const [description, setDescription] = useState(initial?.description ?? "");
   const [thumbnail, setThumbnail] = useState(initial?.thumbnail ?? "");
-  const [category, setCategory] = useState<CategoryType>(
-    initial?.category ?? "CITY",
+  const [category, setCategory] = useState<DBCategoryType>(
+    (initial?.category ?? "CITY") as DBCategoryType,
   );
   const [blocks, setBlocks] = useState<EditorBlockType[]>(
     initialBlocks(initial?.blocks),
@@ -271,7 +272,7 @@ export function PostEditor({ lang, initial }: PostEditorProps) {
               <select
                 value={category}
                 onChange={(event) =>
-                  setCategory(event.target.value as CategoryType)
+                  setCategory(event.target.value as DBCategoryType)
                 }
                 className="cursor-pointer appearance-none rounded-lg bg-deep-blue py-2 pl-4 pr-10 font-bold text-white outline-none"
               >

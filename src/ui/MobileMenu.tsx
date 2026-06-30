@@ -35,14 +35,14 @@ const menuVariants = {
     x: 0,
     transition: {
       duration: 0.35,
-      ease: [0.22, 1, 0.36, 1],
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
     },
   },
   exit: {
     x: "100%",
     transition: {
       duration: 0.25,
-      ease: [0.4, 0, 1, 1],
+      ease: [0.4, 0, 1, 1] as [number, number, number, number],
     },
   },
 };

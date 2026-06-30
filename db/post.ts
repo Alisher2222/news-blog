@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import type { CategoryType, LocalizedText } from "@/src/types";
+import type { DBCategoryType, LocalizedText } from "@/src/types";
 import { unstable_cache } from "next/cache";
 import { mapPostToPostType } from "./postMapper";
 
@@ -7,7 +7,7 @@ export async function createPost(data: {
   title: LocalizedText;
   description: LocalizedText;
   thumbnail: string;
-  category: CategoryType;
+  category: DBCategoryType;
   authorId: string;
 }) {
   return prisma.post.create({ data });
@@ -19,7 +19,7 @@ export async function updatePost(
     title: LocalizedText;
     description: LocalizedText;
     thumbnail: string;
-    category: CategoryType;
+    category: DBCategoryType;
   },
 ) {
   return prisma.post.update({ where: { id }, data });
@@ -80,7 +80,7 @@ export const getPostById = unstable_cache(
 );
 
 export const getPostsByCategory = unstable_cache(
-  async (category: CategoryType) => {
+  async (category: DBCategoryType) => {
     const posts = await prisma.post.findMany({
       where: {
         category,
