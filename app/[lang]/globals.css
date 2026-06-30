@@ -7,7 +7,7 @@
 
 @theme {
   --font-sans: var(--font-inter), sans-serif;
-  --font-heading: "Times New Roman", Times, Georgia, serif;
+  --font-heading: var(--font-inter), sans-serif;
 
   --color-deep-blue: #0e172a;
   --color-light-blue: #143362;
