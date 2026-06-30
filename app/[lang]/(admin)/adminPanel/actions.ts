@@ -6,13 +6,8 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { deletePostById, updatePost } from "@/db/post";
 import { replacePostContents } from "@/db/postContent";
-import type { CreatePostInput, Language, LocalizedText } from "@/src/types";
-
-const toLocalized = (value: string): LocalizedText => ({
-  ru: value,
-  kk: value,
-  en: value,
-});
+import { toLocalized } from "@/lib/translate";
+import type { CreatePostInput, Language } from "@/src/types";
 
 export type MutatePostResult = { error: string };
 
@@ -38,10 +33,18 @@ export async function updatePostAction(
 
   if (blocks.length === 0) return { error: "CONTENT_REQUIRED" };
 
+  // Translate all text fields in parallel before saving.
+  const [titleLocalized, descriptionLocalized, ...blocksLocalized] =
+    await Promise.all([
+      toLocalized(title, input.lang),
+      toLocalized(description, input.lang),
+      ...blocks.map((block) => toLocalized(block.value, input.lang)),
+    ]);
+
   // Request 1 — update the post fields.
   await updatePost(postId, {
-    title: toLocalized(title),
-    description: toLocalized(description),
+    title: titleLocalized,
+    description: descriptionLocalized,
     thumbnail,
     category: input.category,
   });
@@ -49,9 +52,9 @@ export async function updatePostAction(
   // Request 2 — replace the ordered content blocks.
   await replacePostContents(
     postId,
-    blocks.map((block) => ({
+    blocks.map((block, i) => ({
       type: block.type,
-      content: toLocalized(block.value),
+      content: blocksLocalized[i],
     })),
   );
 

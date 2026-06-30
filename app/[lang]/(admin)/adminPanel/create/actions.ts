@@ -6,15 +6,8 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { createPost } from "@/db/post";
 import { createPostContents } from "@/db/postContent";
-import type { CreatePostInput, LocalizedText } from "@/src/types";
-
-// The editor captures one language at a time; mirror it into every locale so the
-// stored JSON satisfies the localized-string shape the read mappers expect.
-const toLocalized = (value: string): LocalizedText => ({
-  ru: value,
-  kk: value,
-  en: value,
-});
+import { toLocalized } from "@/lib/translate";
+import type { CreatePostInput } from "@/src/types";
 
 export type CreatePostResult = { error: string };
 
@@ -39,10 +32,18 @@ export async function createPostAction(
 
   if (blocks.length === 0) return { error: "CONTENT_REQUIRED" };
 
+  // Translate all text fields in parallel before saving.
+  const [titleLocalized, descriptionLocalized, ...blocksLocalized] =
+    await Promise.all([
+      toLocalized(title, input.lang),
+      toLocalized(description, input.lang),
+      ...blocks.map((block) => toLocalized(block.value, input.lang)),
+    ]);
+
   // Request 1 — create the post and get its generated id.
   const post = await createPost({
-    title: toLocalized(title),
-    description: toLocalized(description),
+    title: titleLocalized,
+    description: descriptionLocalized,
     thumbnail,
     category: input.category,
     authorId: session.user.id,
@@ -51,9 +52,9 @@ export async function createPostAction(
   // Request 2 — create the ordered content blocks for that post.
   await createPostContents(
     post.id,
-    blocks.map((block) => ({
+    blocks.map((block, i) => ({
       type: block.type,
-      content: toLocalized(block.value),
+      content: blocksLocalized[i],
     })),
   );
 
