@@ -9,6 +9,7 @@ import { getRouteLanguage } from "@/src/utils/routeParams";
 import { getRecentPosts } from "@/db/post";
 import { PostType } from "@/src/types";
 import { constantValue } from "@/src/locales/dictionary";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({
   subsets: ["cyrillic-ext", "latin", "cyrillic"],
@@ -49,6 +50,7 @@ export default async function RootLayout({
           email={constantValue.email}
           address={constantValue.address}
         />
+        <Analytics />
       </body>
     </html>
   );
