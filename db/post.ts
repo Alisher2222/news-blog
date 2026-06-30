@@ -95,6 +95,20 @@ export const getPostsByCategory = unstable_cache(
   },
 );
 
+export const getPostsByAuthorId = unstable_cache(
+  async (id: string) => {
+    const posts = await prisma.post.findMany({
+      where: {
+        authorId: id,
+      },
+    });
+
+    return posts.map(mapPostToPostType);
+  },
+  ["posts-by-author-id"],
+  { revalidate: 60 },
+);
+
 export async function incrementViews(id: string) {
   await prisma.post.update({
     where: {
