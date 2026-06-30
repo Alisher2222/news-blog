@@ -3,14 +3,13 @@ import { SideBarElementType } from "../types";
 import { formatRelativeDate } from "./formatDate";
 
 export async function getRecentNewsData(
-  postNumber: number,
   posts: PostType[],
   language: Language,
 ): Promise<SideBarElementType[]> {
-  return posts.slice(0, postNumber).map((post) => ({
+  return posts.slice(0, 7).map((post) => ({
     id: post.id,
     date: formatRelativeDate(post.createdAt, language),
     title: post.title[language],
-    link: `${language}/posts/${post.id}`,
+    link: `/${language}/posts/${post.id}`,
   }));
 }

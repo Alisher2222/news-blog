@@ -1,25 +1,53 @@
 "use client";
 
-import { IoIosClose } from "react-icons/io";
-import { navLinks } from "@/src/locales/dictionary";
-import { Language } from "@/src/types";
-import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { Logo } from "./Logo";
+import { AnimatePresence, motion } from "framer-motion";
+import { IoIosClose } from "react-icons/io";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
-const menuVariants = {
+import { navLinks } from "@/src/locales/dictionary";
+import { Language } from "@/src/types";
+import { Logo } from "./Logo";
+
+const backdropVariants = {
   hidden: {
-    x: "200%",
     opacity: 0,
   },
   visible: {
-    x: "0%",
     opacity: 1,
+    transition: {
+      duration: 0.25,
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      duration: 0.2,
+    },
   },
 };
 
-type MobileMenuType = {
+const menuVariants = {
+  hidden: {
+    x: "100%",
+  },
+  visible: {
+    x: 0,
+    transition: {
+      duration: 0.35,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+  exit: {
+    x: "100%",
+    transition: {
+      duration: 0.25,
+      ease: [0.4, 0, 1, 1],
+    },
+  },
+};
+
+type MobileMenuProps = {
   language: Language;
   isVisible: boolean;
   onClose: () => void;
@@ -27,50 +55,62 @@ type MobileMenuType = {
 };
 
 export default function MobileMenu({
+  language,
   isVisible,
   onClose,
-  language,
   cityName,
-}: MobileMenuType) {
+}: MobileMenuProps) {
   return (
     <AnimatePresence>
       {isVisible && (
-        <div className="w-screen h-screen fixed right-0 top-0 bg-gray-50 z-50">
+        <motion.div
+          variants={backdropVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          onClick={onClose}
+          className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm"
+        >
           <motion.nav
             variants={menuVariants}
             initial="hidden"
             animate="visible"
-            exit="hidden"
-            className="container mx-auto px-5 h-full flex items-center flex-col relative py-5"
+            exit="exit"
+            onClick={(e) => e.stopPropagation()}
+            className="absolute right-0 top-0 h-full w-full bg-gray-50 md:w-[420px]"
           >
-            <Logo language={language} cityName={cityName} variant="dark" />
-            <hr className="w-full border-1 border-gray-border my-4" />
-            <ul className="uppercase text-deep-blue text-lg  w-full font-extrabold">
-              {navLinks[language].map((link, index) => (
-                <Link
-                  className="hover:text-red"
-                  href={link.href}
-                  key={`mobileMenu-${index}`}
+            <div className="container mx-auto flex h-full flex-col px-5 py-5">
+              <div className="flex items-center justify-between">
+                <Logo language={language} cityName={cityName} variant="dark" />
+
+                <button
                   onClick={onClose}
+                  className="cursor-pointer rounded-full p-1 transition-colors hover:bg-gray-200"
                 >
-                  <li
-                    className="h-20 hover:text-red cursor-pointer flex items-center justify-between"
-                    key={`header-navlink-${link.text}`}
-                  >
-                    {link.text}
-                    <MdOutlineKeyboardArrowRight className="size-10" />
+                  <IoIosClose className="size-10 text-black" />
+                </button>
+              </div>
+
+              <hr className="my-5 border-gray-border" />
+
+              <ul className="w-full flex-1 uppercase text-lg font-extrabold text-deep-blue">
+                {navLinks[language].map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      onClick={onClose}
+                      className="flex h-20 items-center justify-between border-b border-gray-border transition-colors duration-200 hover:text-red"
+                    >
+                      <span>{link.text}</span>
+
+                      <MdOutlineKeyboardArrowRight className="size-8 transition-transform duration-200 group-hover:translate-x-1" />
+                    </Link>
                   </li>
-                </Link>
-              ))}
-            </ul>
-            <button
-              className="absolute right-4 top-4 cursor-pointer"
-              onClick={onClose}
-            >
-              <IoIosClose className="text-black size-10" />
-            </button>
+                ))}
+              </ul>
+            </div>
           </motion.nav>
-        </div>
+        </motion.div>
       )}
     </AnimatePresence>
   );

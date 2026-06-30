@@ -275,11 +275,15 @@ export function PostEditor({ lang, initial }: PostEditorProps) {
                 }
                 className="cursor-pointer appearance-none rounded-lg bg-deep-blue py-2 pl-4 pr-10 font-bold text-white outline-none"
               >
-                {CATEGORIES.map((value) => (
-                  <option key={value} value={value} className="text-black">
-                    {categoryText[value][lang]}
-                  </option>
-                ))}
+                {CATEGORIES.map((value) => {
+                  if (value !== "ALL") {
+                    return (
+                      <option key={value} value={value} className="text-black">
+                        {categoryText[value][lang]}
+                      </option>
+                    );
+                  }
+                })}
               </select>
               <LuChevronDown className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-white" />
             </div>

@@ -27,11 +27,11 @@ export function Hero({
   return (
     <div className="[grid-area:hero]  flex flex-col gap-2">
       <div className="flex justify-between pb-1 border-b-2 border-deep-blue">
-        <h1 className="text-deep-blue font-extrabold text-3xl font-heading">
+        <h1 className="text-deep-blue font-extrabold text-xl sm:text-3xl font-heading">
           {heroText[language].title}
         </h1>
         <Link
-          href={`${language}/posts`}
+          href={`/${language}/posts/category/ALL`}
           className="text-red font-bold flex gap-1 items-center"
         >
           {heroText[language].allNewsLink}
@@ -39,22 +39,24 @@ export function Hero({
         </Link>
       </div>
       <Link href={link}>
-        <section
+        <div
           style={{ backgroundImage: `url(${thumbnail})` }}
-          className=" transition-all duration-300 hover:-translate-2 flex flex-col justify-end gap-3 rounded-xl h-[700px] bg-cover  p-10 bg-center bg-no-repeat "
+          className="relative transition-all duration-300 rounded-xl  hover:-translate-2 h-[300px] sm:h-[500px] lg:h-[700px] bg-cover bg-center bg-no-repeat "
         >
-          <div className="flex gap-4">
-            <Category category={category} />
-            <p className="text-white flex items-center gap-1">
-              <IoTimeOutline />
-              {time}
-            </p>
+          <div className="absolute inset-0 bg-black/50 flex flex-col justify-end gap-3 rounded-xl p-10">
+            <div className="flex gap-4">
+              <Category category={category} />
+              <p className="text-white flex items-center gap-1">
+                <IoTimeOutline />
+                {time}
+              </p>
+            </div>
+            <h2 className="font-extrabold text-white text-2xl sm:text-5xl lg:text-[60px] font-heading">
+              {title}
+            </h2>
+            <p className="hidden sm:block">{description}</p>
           </div>
-          <h2 className="font-extrabold text-white text-[60px] font-heading">
-            {title}
-          </h2>
-          <p>{description}</p>
-        </section>
+        </div>
       </Link>
     </div>
   );

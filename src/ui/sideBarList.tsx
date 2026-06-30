@@ -1,5 +1,4 @@
 import { Language } from "@/src/types";
-import { CiStreamOn } from "react-icons/ci";
 import { SideBarElementType } from "@/src/types";
 import { SideBarElement } from "./sideBarElement";
 
@@ -20,8 +19,7 @@ export function SideBar({ language, recentNews, className = "" }: SideBarType) {
     <aside className={` ${className} bg-white`}>
       <div className="bg-deep-blue flex justify-between py-2 px-3">
         <div className="flex items-center gap-1">
-          <CiStreamOn className="text-red" size={32} />
-          <h2 className="text-white uppercase lg:text-xl">
+          <h2 className="text-white uppercase text-[16px] xl:text-xl">
             {heading[language]}
           </h2>
         </div>

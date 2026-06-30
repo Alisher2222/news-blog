@@ -34,17 +34,20 @@ export function Header({ cityName, language }: HeaderProps) {
             ))}
           </ul>
         </nav>
-        <Suspense
-          fallback={<div className="w-20 h-8 bg-gray-100 animate-pulse" />}
-        >
-          <LanguageSwitcher />
-        </Suspense>
-        <button
-          className="block cursor-pointer 2xl:hidden"
-          onClick={() => setIsVisible(true)}
-        >
-          <CiMenuBurger className="text-black size-8" />
-        </button>
+
+        <div className="flex gap-5">
+          <Suspense
+            fallback={<div className="w-20 h-8 bg-gray-100 animate-pulse" />}
+          >
+            <LanguageSwitcher />
+          </Suspense>
+          <button
+            className="block cursor-pointer 2xl:hidden"
+            onClick={() => setIsVisible(true)}
+          >
+            <CiMenuBurger className="text-black size-8" />
+          </button>
+        </div>
       </div>
       <MobileMenu
         isVisible={isVisible}

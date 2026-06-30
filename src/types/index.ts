@@ -40,7 +40,8 @@ export type CategoryType =
   | "CULTURE"
   | "SPORTS"
   | "POLITICS"
-  | "SCIENCE";
+  | "SCIENCE"
+  | "ALL";
 
 export type RoleType = "JOURNALIST" | "ADMIN";
 export type PostContentKind = "PARAGRAPH" | "QUOTE" | "IMAGE";

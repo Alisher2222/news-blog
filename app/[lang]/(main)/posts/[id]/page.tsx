@@ -28,7 +28,7 @@ export default async function Post({ params }: PostProps) {
   const content = await getPostContentsByPostId(id);
   const author = await getUserById(post.authorId);
   const posts = await getPosts();
-  const recentNews = await getRecentNewsData(7, posts, lang);
+  const recentNews = await getRecentNewsData(posts, lang);
   return (
     <article className="grid items-start gap-x-10 grid-cols-1 [grid-template-areas:'mainContent'_'sidebar'] lg:grid-cols-4 lg:[grid-template-areas:'mainContent_mainContent_mainContent_sidebar']">
       <ViewTracker id={post.id} />
@@ -51,7 +51,7 @@ export default async function Post({ params }: PostProps) {
         <img
           src={`${post?.thumbnail}`}
           alt=""
-          className="w-[80%] mx-auto rounded-2xl"
+          className=" h-[400px] w-full sm:w-[80%]  sm:h-[600px] mx-auto rounded-2xl  bg-cover bg-center bg-no-repeat "
         />
         <div className="flex flex-col gap-5 text-deep-blue">
           {content.map((c) => {
@@ -66,7 +66,7 @@ export default async function Post({ params }: PostProps) {
                     key={c.id}
                     src={c.content[lang]}
                     alt=""
-                    className="w-full rounded-2xl"
+                    className="h-[400px] w-full sm:w-[80%]  sm:h-[600px]rounded-2xl mx-auto"
                   />
                 );
             }

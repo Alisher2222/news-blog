@@ -1,7 +1,7 @@
 import { categoryText } from "@/src/locales/dictionary";
 import { categoryPageText } from "@/src/locales/dictionary";
 import { getRouteCategory, getRouteLanguage } from "@/src/utils/routeParams";
-import { getPostsByCategory } from "@/db/post";
+import { getPosts, getPostsByCategory } from "@/db/post";
 import { CategorySearch } from "./components/CategorySearch";
 
 type CategoryPageProps = {
@@ -12,7 +12,15 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const { lang: routeLang, name: routeName } = await params;
   const lang = getRouteLanguage(routeLang);
   const name = getRouteCategory(routeName);
-  const posts = await getPostsByCategory(name);
+
+  let posts;
+
+  if (name === "ALL") {
+    posts = await getPosts();
+  } else {
+    posts = await getPostsByCategory(name);
+  }
+
   return (
     <div className="flex flex-col gap-3">
       <h2 className="text-deep-blue text-2xl">{categoryText[name][lang]}</h2>

@@ -151,6 +151,11 @@ export const heroText: LocalizedData<HeroTextContent> = {
 };
 
 export const categoryText: Record<CategoryType, CategoryTextType> = {
+  ALL: {
+    ru: "ВСЕ",
+    kk: "БАРЛЫҒЫ",
+    en: "ALL",
+  },
   CITY: {
     ru: "ГОРОД",
     kk: "ҚАЛА",

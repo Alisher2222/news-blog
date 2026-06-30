@@ -14,8 +14,8 @@ export default async function Home({
   const { lang: routeLang } = await params;
   const lang = getRouteLanguage(routeLang);
 
-  const posts = await getPosts(7);
-  const recentNews = await getRecentNewsData(7, posts, lang);
+  const posts = await getPosts(8);
+  const recentNews = await getRecentNewsData(posts, lang);
 
   return (
     <div className="grid grid-cols-1 [grid-template-areas:'hero'_'cards'_'sidebar'] lg:grid-cols-4 lg:[grid-template-areas:'hero_hero_hero_sidebar'_'cards_cards_cards_sidebar'] gap-y-[40px] gap-x-[20px]">

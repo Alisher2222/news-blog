@@ -11,6 +11,7 @@ const categories = [
   "SPORTS",
   "POLITICS",
   "SCIENCE",
+  "ALL",
 ] satisfies CategoryType[];
 
 export function getRouteLanguage(value: string): Language {
